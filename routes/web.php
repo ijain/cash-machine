@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\BankMachine;
-use App\Http\Controllers\CardMachine;
-use App\Http\Controllers\CashMachine1;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
