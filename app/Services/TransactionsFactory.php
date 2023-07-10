@@ -10,18 +10,10 @@ class TransactionsFactory
 {
     public static function make(string $source, array $input)
     {
-        switch ($source) {
-            case 'card':
-                $transaction = new CardTransaction($input);
-                break;
-            case 'bank':
-                $transaction = new BankTransaction($input);
-                break;
-            default:
-                $transaction = new CashTransaction($input);
-                break;
-        }
-
-        return $transaction;
+        return match ($source) {
+            'card' => new CardTransaction($input),
+            'bank' => new BankTransaction($input),
+            default => new CashTransaction($input),
+        };
     }
 }

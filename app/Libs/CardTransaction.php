@@ -3,15 +3,14 @@
 namespace App\Libs;
 
 use App\Interfaces\iTransaction;
-use Illuminate\Http\Request;
 
 class CardTransaction implements iTransaction
 {
     private array $input;
 
-    public function __construct(Request $request)
+    public function __construct(array $input)
     {
-        $this->input = $request->except(['_token']);
+        $this->input = $input;
     }
 
     /**

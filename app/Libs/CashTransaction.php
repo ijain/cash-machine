@@ -4,6 +4,7 @@ namespace App\Libs;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\iTransaction;
+use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class CashTransaction extends Controller implements iTransaction
@@ -17,6 +18,7 @@ class CashTransaction extends Controller implements iTransaction
 
     /**
      * Validate Inputs
+     * @throws Exception
      */
     public function validate()
     {
@@ -35,7 +37,7 @@ class CashTransaction extends Controller implements iTransaction
         ]);
 
         if($validator->fails()){
-            return redirect()->action('App\Http\Controllers\TransactionController@create', ['cash']);
+            throw new Exception('There are validation errors');
         }
     }
 

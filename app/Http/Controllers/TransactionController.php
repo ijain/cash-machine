@@ -24,15 +24,20 @@ class TransactionController extends Controller
     public function store(Request $request, string $source)
     {
         $input = $request->except(['_token']);
-        $tx = TransactionsFactory::make($source, $input);
 
-        $cashMachine = new CashingMachine();
-        $transaction = $cashMachine->store($tx);
+        try {
+            $factory = TransactionsFactory::make($source, $input);
 
-        $sourceData = Source::whereName($source)->first();
-        $sourceData->transactions()->sync($transaction);
+            $cashMachine = new CashingMachine();
+            $transaction = $cashMachine->store($factory);
 
-        return redirect('/' . $source . '/confirm')->with(['status' => 'success']);
+            $sourceData = Source::whereName($source)->first();
+            $sourceData->transactions()->sync($transaction);
+
+            return redirect('/' . $source . '/confirm')->with(['status' => 'success']);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', "The Message")->withInput($input);
+        }
     }
 
     /**
