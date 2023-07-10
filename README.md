@@ -1,2 +1,1 @@
-# cash-machine
-Test task
+#### Cash Machine
