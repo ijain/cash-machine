@@ -33,9 +33,7 @@ class BankTransaction implements iTransaction
             'date_of_birth.required' => 'Укажите дату рождения.',
         ]);
 
-        if($validator->fails()){
-            return back()->with('error', $validator)->withInput($this->input);
-        }
+        return !$validator->fails();
     }
 
     /**
