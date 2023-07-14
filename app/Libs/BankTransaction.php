@@ -17,7 +17,7 @@ class BankTransaction implements iTransaction
     /**
      * Validate Inputs
      */
-    public function validate()
+    public function validator()
     {
         $validator = Validator::make($this->input, [
             'citizenship' => 'required',

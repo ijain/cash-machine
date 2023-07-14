@@ -12,8 +12,6 @@ class CashingMachine
      */
     public function store(iTransaction $transaction)
     {
-        $transaction->validate();
-
         $tx = new Transaction();
         $tx->total = $transaction->amount();
         $tx->inputs = $transaction->inputs();

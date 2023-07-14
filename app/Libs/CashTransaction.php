@@ -4,6 +4,7 @@ namespace App\Libs;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\iTransaction;
+use App\Rules\CashTotal;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,25 +21,17 @@ class CashTransaction extends Controller implements iTransaction
      * Validate Inputs
      * @throws Exception
      */
-    public function validate()
+    public function validator()
     {
-        $validator = Validator::make($this->input, [
-            'bills.1' => 'required',
-            'bills.2' => 'required',
-            'bills.3' => 'required',
-            'bills.4' => 'required',
-            'bills.5' => 'required',
-        ],[
-            'bills.1.required' => 'required',
-            'bills.2.required' => 'required',
-            'bills.3.required' => 'required',
-            'bills.4.required' => 'required',
-            'bills.5.required' => 'required',
-        ]);
-
-        if($validator->fails()){
-            throw new Exception('There are validation errors');
-        }
+        return Validator::make(
+            $this->input,
+            [
+                'bills.*' => 'required'
+            ],
+            [
+                'bills.*.required' => 'The number of bills must be 0 or greater'
+            ]
+        );
     }
 
     /**

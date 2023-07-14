@@ -7,7 +7,7 @@ interface iTransaction
     /**
      * Validate Inputs
      */
-    public function validate();
+    public function validator();
 
     /**
      * Return total amount

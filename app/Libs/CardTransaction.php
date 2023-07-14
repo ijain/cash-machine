@@ -16,7 +16,8 @@ class CardTransaction implements iTransaction
     /**
      * Validate Inputs
      */
-    public function validate() {
+    public function validator()
+    {
 
     }
 

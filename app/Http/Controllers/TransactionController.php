@@ -10,6 +10,17 @@ use App\Services\TransactionsFactory;
 
 class TransactionController extends Controller
 {
+    public function home()
+    {
+        $total = Transaction::whereDate('created_at', date('Y-m-d'))->sum('amount');
+
+        if ($total >= 20000) {
+            return view('welcome-limit');
+        }
+
+        return view('welcome');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -25,19 +36,20 @@ class TransactionController extends Controller
     {
         $input = $request->except(['_token']);
 
-        try {
-            $factory = TransactionsFactory::make($source, $input);
+        $factory = TransactionsFactory::make($source, $input);
+        $validator = $factory->validator();
 
-            $cashMachine = new CashingMachine();
-            $transaction = $cashMachine->store($factory);
-
-            $sourceData = Source::whereName($source)->first();
-            $sourceData->transactions()->sync($transaction);
-
-            return redirect('/' . $source . '/confirm')->with(['status' => 'success']);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('message', "The Message")->withInput($input);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($factory->inputs());
         }
+
+        $cashMachine = new CashingMachine();
+        $transaction = $cashMachine->store($factory);
+
+        $sourceData = Source::whereName($source)->first();
+        $sourceData->transactions()->sync($transaction);
+
+        return redirect('/' . $source . '/confirm')->with(['status' => 'success']);
     }
 
     /**
