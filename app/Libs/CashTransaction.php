@@ -4,7 +4,6 @@ namespace App\Libs;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\iTransaction;
-use App\Rules\CashTotal;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 
