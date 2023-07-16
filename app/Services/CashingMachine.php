@@ -10,12 +10,13 @@ class CashingMachine
     /**
      * Store transaction in Database
      */
-    public function store(iTransaction $transaction)
+    public function store(iTransaction $sourceTransaction)
     {
-        $tx = new Transaction();
-        $tx->total = $transaction->amount();
-        $tx->inputs = $transaction->inputs();
+        $transaction = new Transaction();
+        $transaction->total = $sourceTransaction->amount();
+        $transaction->inputs = $sourceTransaction->inputs();
+        $transaction->save();
 
-        return $tx->save();
+        return $transaction;
     }
 }

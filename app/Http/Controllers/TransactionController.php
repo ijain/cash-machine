@@ -14,7 +14,7 @@ class TransactionController extends Controller
     {
         $total = Transaction::whereDate('created_at', date('Y-m-d'))->sum('amount');
 
-        if ($total >= 20000) {
+        if ($total >= Transaction::TOTAL_LIMIT) {
             return view('welcome-limit');
         }
 
@@ -40,23 +40,23 @@ class TransactionController extends Controller
         $validator = $factory->validator();
 
         if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput($factory->inputs());
+            return redirect()->back()->withErrors($validator)->withInput($input);
         }
 
         $cashMachine = new CashingMachine();
         $transaction = $cashMachine->store($factory);
 
         $sourceData = Source::whereName($source)->first();
-        $sourceData->transactions()->sync($transaction);
+        $sourceData->transactions()->syncWithoutDetaching($transaction);
 
-        return redirect('/' . $source . '/confirm')->with(['status' => 'success']);
+        return redirect('/' . $source . '/' . $transaction->id . '/confirm')->with('status', 'success');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Transaction $transaction, string $source)
+    public function show(string $source, Transaction $transaction)
     {
-        return view($source . '-confirm');
+        return view($source . '-confirm', ['transaction' => $transaction]);
     }
 }

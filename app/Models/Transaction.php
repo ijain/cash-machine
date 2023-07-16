@@ -9,10 +9,17 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    const CASH_LIMIT = 10000;
+    const TOTAL_LIMIT = 20000;
+
+    const OUTPUT_CASH_LIMIT = '10.000';
+    const OUTPUT_TOTAL_LIMIT = '20.000';
+
     /**
      * @var string $table
      */
     protected $table = 'transactions';
+    protected $hidden = ['updated_at'];
 
     /**
      * @var array $fillable

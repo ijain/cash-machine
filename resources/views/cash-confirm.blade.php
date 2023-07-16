@@ -19,10 +19,18 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                {{$total ?? 0}}
+                ID: {{$transaction->id ?? 0}}
             </div>
             <div class="form-group">
-                {{$inputs ?? 'No data'}}
+                Inputs<br>
+                @forelse ($transaction->inputs as $banknote => $value)
+                    <li>Banknote {{ $banknote }}: {{ $value }}</li>
+                @empty
+                    <p>No data</p>
+                @endforelse
+            </div>
+            <div class="form-group">
+                Total Amount: {{$transaction->total ?? 0}}
             </div>
         </div>
     </div>

@@ -18,27 +18,36 @@
             Credit Card Transaction
         </div>
         <div class="card-body">
+            @if ($errors->has('total'))
+                <div class="card-text text-left font-weight-bold" style="padding-bottom: 10px">
+                    <span class="text-danger">{{ $errors->first('total') }}</span>
+                </div>
+            @endif
+
             <form name="card-form" id="card-form" method="post" action="/card">
                 @csrf
                 <div class="form-group">
                     <label for="card-number">Card Number</label>
-                    <input placeholder="card number" type="text" id="card-number" name="card-number" class="form-control" required>
+                    <input placeholder="card number" type="text" id="card-number" name="card-number" class="form-control">
+                    @if ($errors->has('card-number'))
+                        <span class="text-danger"><b>{{ $errors->first('card-number') }}</b></span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="expiration-date">Expiration Date (MM/YYYY)</label>
-                    <input placeholder="expiration date" type="text" id="expiration-date" name="expiration-date" class="form-control" required>
+                    <input placeholder="expiration date" type="text" id="expiration-date" name="expiration-date" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="cardholder">Cardholder</label>
-                    <input placeholder="cardholder" type="text" id="cardholder" name="cardholder" class="form-control" required>
+                    <input placeholder="cardholder" type="text" id="cardholder" name="cardholder" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="cvv">CVV</label>
-                    <input placeholder="cvv" type="text" id="cvv" name="cvv" class="form-control" required>
+                    <input placeholder="cvv" type="text" id="cvv" name="cvv" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="amount">Amount</label>
-                    <input placeholder="amount" type="text" id="amount" name="amount" class="form-control" required>
+                    <input placeholder="amount" type="text" id="amount" name="amount" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

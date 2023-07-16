@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TransactionController::class, 'home'])->name('home');
 Route::get('/{source}', [TransactionController::class, 'create']);
 Route::post('/{source}', [TransactionController::class, 'store']);
-Route::get('/{source}/confirm', [TransactionController::class, 'show']);
+Route::get('/{source}/{transaction}/confirm', [TransactionController::class, 'show']);

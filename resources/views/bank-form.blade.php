@@ -22,19 +22,19 @@
                 @csrf
                 <div class="form-group">
                     <label for="transfer-date">Transfer Date</label>
-                    <input placeholder="transfer date" type="text" id="transfer-date" name="transfer-date" class="form-control" required>
+                    <input placeholder="transfer date" type="text" id="transfer-date" name="transfer-date" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="customer-name">Customer Name</label>
-                    <input placeholder="customer name" type="text" id="customer-name" name="customer-name" class="form-control" required>
+                    <input placeholder="customer name" type="text" id="customer-name" name="customer-name" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="account-number">Account Number</label>
-                    <input placeholder="account number" type="text" id="account-number" name="account-number" class="form-control" required>
+                    <input placeholder="account number" type="text" id="account-number" name="account-number" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="amount">Amount</label>
-                    <input placeholder="amount" type="text" id="amount" name="amount" class="form-control" required>
+                    <input placeholder="amount" type="text" id="amount" name="amount" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
