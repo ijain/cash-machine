@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Cash Machine - Cash Transaction</title>
+    <title>Cash Machine - Cash Transaction Confirmation</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{route('home')}}/css/bootstrap.min.css">
 </head>

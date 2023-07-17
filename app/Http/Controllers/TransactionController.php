@@ -12,7 +12,7 @@ class TransactionController extends Controller
 {
     public function home()
     {
-        $total = Transaction::whereDate('created_at', date('Y-m-d'))->sum('amount');
+        $total = Transaction::query()->whereDate('created_at', '=', date("Y-m-d"))->sum('total');
 
         if ($total >= Transaction::TOTAL_LIMIT) {
             return view('welcome-limit');

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Cash Machine - Cash Transaction</title>
+    <title>Cash Machine - Cash Transaction Confirmation</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{route('home')}}/css/bootstrap.min.css">
 </head>
@@ -15,7 +15,7 @@
     <div class="card">
         <div class="card-header text-center font-weight-bold">
             <span style="float: left"><a href="{{route('home')}}">back</a></span>
-            Cash Transaction Data
+            Credit Card Transaction Data
         </div>
         <div class="card-body">
             <div class="form-group">
