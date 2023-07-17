@@ -34,9 +34,9 @@ class CashTransaction extends Controller implements iTransaction
             ]
         );
 
-        $total = Transaction::whereDate('created_at', date('Y-m-d'))->sum('amount');
+        $validator->after(function ($validator) {
+            $total = Transaction::whereDate('created_at', date('Y-m-d'))->sum('amount');
 
-        $validator->after(function ($validator) use ($total) {
             if ($this->amount() > Transaction::CASH_LIMIT) {
                 $validator->errors()->add('total', 'The total amount must not exceed ' . Transaction::OUTPUT_CASH_LIMIT);
             } elseif ($this->amount() <= 0) {
