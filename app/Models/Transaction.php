@@ -39,4 +39,11 @@ class Transaction extends Model
     {
         return $this->belongsTo(Source::class);
     }
+
+    public static function total()
+    {
+        return Transaction::query()
+            ->whereDate('created_at', date("Y-m-d"))
+            ->sum('total');
+    }
 }
