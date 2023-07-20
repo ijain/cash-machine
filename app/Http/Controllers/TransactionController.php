@@ -24,6 +24,10 @@ class TransactionController extends Controller
      */
     public function create($source)
     {
+        if (Transaction::total() >= Transaction::TOTAL_LIMIT) {
+            return view('welcome-limit');
+        }
+
         return view($source . '-form');
     }
 
@@ -55,6 +59,10 @@ class TransactionController extends Controller
      */
     public function show(string $source, Transaction $transaction)
     {
+        if (Transaction::total() >= Transaction::TOTAL_LIMIT) {
+            return view('welcome-limit');
+        }
+
         return view($source . '-confirm', ['transaction' => $transaction]);
     }
 }
