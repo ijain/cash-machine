@@ -42,8 +42,8 @@ class CardTransaction implements iTransaction
         );
 
         $validator->after(function ($validator) {
-            if ((Transaction::total() + (int)$this->amount()) >= Transaction::TOTAL_LIMIT) {
-                $validator->errors()->add('total', 'The total amount of all transactions for the day must not exceed ' . Transaction::OUTPUT_TOTAL_LIMIT);
+            if ((Transaction::total() + (int)$this->amount()) > Transaction::TOTAL_LIMIT) {
+                $validator->errors()->add('total', 'The total amount of all transactions for the day must not exceed ' . Transaction::TOTAL_LIMIT . '. The current total is ' . Transaction::total() . '.');
             }
         });
 
